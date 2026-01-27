@@ -1,20 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Comunidad Peor es Nada</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <!-- Mensaje si no hay avisos -->
+  <div *ngIf="avisos.length === 0" class="ion-text-center ion-padding">
+    <ion-text color="medium">
+      <h3>No hay avisos publicados</h3>
+      <p>Presiona el botón + para crear uno</p>
+    </ion-text>
   </div>
-</ion-content>
+
+  <!-- Lista de avisos usando el componente -->
+  <ion-list *ngIf="avisos.length > 0">
+    <app-aviso-card 
+      *ngFor="let aviso of avisos" 
+      [aviso]="aviso"
+      (eliminar)="confirmarEliminacion($event)">
+    </app-aviso-card>
+  </ion-list>
+  
+  <!-- Botón flotante para crear -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/crear-aviso">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>s

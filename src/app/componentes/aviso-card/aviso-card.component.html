@@ -1,0 +1,22 @@
+<ion-card>
+  <ion-img *ngIf="aviso.foto" [src]="aviso.foto"></ion-img>
+  
+  <ion-card-header>
+    <ion-card-title>{{ aviso.titulo }}</ion-card-title>
+    <ion-card-subtitle>
+      {{ aviso.fecha | date:'dd/MM/yyyy HH:mm' }} - {{ aviso.tipo | titlecase }}
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>{{ aviso.descripcion }}</p>
+    
+    <ion-button 
+      expand="block" 
+      color="danger" 
+      (click)="solicitarEliminacion()">
+      <ion-icon name="trash" slot="start"></ion-icon>
+      Eliminar
+    </ion-button>
+  </ion-card-content>
+</ion-card>
