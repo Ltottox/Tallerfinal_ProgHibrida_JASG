@@ -1,3 +1,4 @@
+// Modelo TypeScript para un aviso comunitario
 export interface Aviso {
   id?: number;
   titulo: string;

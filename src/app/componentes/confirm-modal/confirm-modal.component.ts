@@ -8,14 +8,15 @@ import { CommonModule } from '@angular/common';
   imports: [IonicModule, CommonModule],
   templateUrl: './confirm-modal.component.html'
 })
+// Clase ConfirmModalComponent para el modal de confirmación
 export class ConfirmModalComponent {
   constructor(private modalCtrl: ModalController) {}
 
-  confirmar() {
+  confirmar() {// Método para confirmar la acción
     this.modalCtrl.dismiss({ confirmado: true });
   }
 
-  cancelar() {
+  cancelar() {// Método para cancelar la acción
     this.modalCtrl.dismiss({ confirmado: false });
   }
 }

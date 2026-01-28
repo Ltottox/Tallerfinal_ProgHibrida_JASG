@@ -11,6 +11,7 @@ import { Aviso } from '../../modelos/aviso.model';
   templateUrl: './aviso-card.component.html',
   styleUrls: ['./aviso-card.component.scss']
 })
+// Clase AvisoCardComponent para mostrar la información de un aviso en una tarjeta
 export class AvisoCardComponent {
   @Input() aviso!: Aviso;
   @Output() eliminar = new EventEmitter<number>();
