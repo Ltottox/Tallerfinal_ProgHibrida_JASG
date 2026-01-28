@@ -1,23 +1,60 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Nuevo Aviso</ion-title>
+    <ion-title>Nueva Publicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="stacked">Título</ion-label>
-    <ion-input placeholder="Mínimo 5 caracteres"></ion-input>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label position="stacked">Descripción</ion-label>
-    <ion-textarea rows="4" placeholder="Mínimo 20 caracteres"></ion-textarea>
-  </ion-item>
-  
-  <ion-button expand="block">Tomar Foto</ion-button>
-  <ion-button expand="block" color="success">Publicar</ion-button>
+  <form [formGroup]="avisoForm" (ngSubmit)="guardar()">
+    
+    <!-- TÍTULO y validación obligatoria -->
+    <ion-item>
+      <ion-label position="stacked">Título *</ion-label>
+      <ion-input formControlName="titulo" placeholder="Mínimo 5 caracteres"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="f['titulo'].invalid && f['titulo'].touched">
+      <p class="ion-padding-start">
+        <small *ngIf="f['titulo'].errors?.['required']">El título es obligatorio</small>
+        <small *ngIf="f['titulo'].errors?.['minlength']">Mínimo 5 caracteres</small>
+      </p>
+    </ion-text>
+
+    <!-- DESCRIPCIÓN  y validación obligatoria-->
+    <ion-item>
+      <ion-label position="stacked">Descripción *</ion-label>
+      <ion-textarea formControlName="descripcion" rows="4" placeholder="Mínimo 20 caracteres"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="f['descripcion'].invalid && f['descripcion'].touched">
+      <p class="ion-padding-start">
+        <small *ngIf="f['descripcion'].errors?.['required']">La descripción es obligatoria</small>
+        <small *ngIf="f['descripcion'].errors?.['minlength']">Mínimo 20 caracteres</small>
+      </p>
+    </ion-text>
+
+    <!-- Tipo de aviso -->
+    <ion-item>
+      <ion-label>Tipo de aviso *</ion-label>
+      <ion-select formControlName="tipo">
+        <ion-select-option *ngFor="let tipo of tipos" [value]="tipo">
+          {{ tipo | titlecase }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Foto o imagen de galeria-->
+    <ion-button expand="block" type="button" (click)="capturarFoto()" class="ion-margin-top">
+      <ion-icon name="camera"></ion-icon>
+      Tomar Foto o seleccionar imagen
+    </ion-button>
+    
+    <ion-img *ngIf="fotoTomada" [src]="fotoTomada" class="ion-margin-top"></ion-img>
+
+    <!-- BOTÓN GUARDAR -->
+    <ion-button expand="block" type="submit" color="success" class="ion-margin-top" [disabled]="avisoForm.invalid">
+      Publicar aviso
+    </ion-button>
+  </form>
 </ion-content>

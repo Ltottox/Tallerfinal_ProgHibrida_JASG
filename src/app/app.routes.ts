@@ -1,21 +1,9 @@
 import { Routes } from '@angular/router';
+import { HomePage } from './home/home.page';
+import { CrearAvisoPage } from './crear-aviso/crear-aviso.page';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'crear-aviso',
-    loadComponent: () => import('./crear-aviso/crear-aviso.page').then( m => m.CrearAvisoPage)
-  },
-  {
-    path: 'crear-aviso',
-    loadComponent: () => import('./crear-aviso/crear-aviso.page').then( m => m.CrearAvisoPage)
-  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomePage },
+  { path: 'crear-aviso', component: CrearAvisoPage }
 ];
